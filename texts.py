@@ -83,6 +83,16 @@ TEXTS = {
         "ru": "⬅️ Назад",
         "en": "⬅️ Back"
     },
+    "btn_cancel": {
+        "uz": "❌ To'xtatish",
+        "ru": "❌ Отмена",
+        "en": "❌ Cancel"
+    },
+    "btn_create": {
+        "uz": "✅ Yaratish",
+        "ru": "✅ Создать",
+        "en": "✅ Create"
+    },
 
     # ===== Taqdimot - 1-qadam: Paket tanlash =====
     "presentation_choose_package": {
@@ -115,9 +125,9 @@ TEXTS = {
 
     # ===== Taqdimot - 2-qadam: Sahifalar soni =====
     "presentation_choose_slides": {
-        "uz": "📄 <b>Sahifalar sonini tanlang:</b>\n\n{prices_text}",
-        "ru": "📄 <b>Выберите количество страниц:</b>\n\n{prices_text}",
-        "en": "📄 <b>Choose number of slides:</b>\n\n{prices_text}"
+        "uz": "📄 <b>Sahifalar soni nechta bo'lsin?</b>\n\nQuyidagi tugmalardan birini tanlang (6 dan 30 gacha):",
+        "ru": "📄 <b>Сколько страниц?</b>\n\nВыберите одну из кнопок ниже (от 6 до 30):",
+        "en": "📄 <b>How many slides?</b>\n\nChoose one of the buttons below (6 to 30):"
     },
 
     # ===== Taqdimot - 3-qadam: Dizayn tanlash =====
@@ -159,9 +169,47 @@ TEXTS = {
 
     # ===== Taqdimot - 4-qadam: Mavzu =====
     "presentation_topic": {
-        "uz": "📊 Taqdimot mavzusini yozing:\n\n(Masalan: \"Suniy intellekt va uning kelajagi\")",
-        "ru": "📊 Напишите тему презентации:\n\n(Например: \"Искусственный интеллект и его будущее\")",
-        "en": "📊 Write the presentation topic:\n\n(Example: \"Artificial Intelligence and its future\")"
+        "uz": "📝 <b>Taqdimot mavzusini kiriting:</b>\n\n"
+              "• Mavzuni batafsil yoritishga harakat qiling.\n"
+              "• Qisqartma so'zlarga, imloviy xatoli so'zlarga tushunmay qolishim mumkin.\n\n"
+              "💡 Masalan: <i>Suniy intellekt va uning kelajagi</i>",
+        "ru": "📝 <b>Введите тему презентации:</b>\n\n"
+              "• Постарайтесь подробно описать тему.\n"
+              "• Сокращения и ошибки могут быть неправильно поняты.\n\n"
+              "💡 Например: <i>Искусственный интеллект и его будущее</i>",
+        "en": "📝 <b>Enter the presentation topic:</b>\n\n"
+              "• Try to describe the topic in detail.\n"
+              "• Abbreviations and typos may be misunderstood.\n\n"
+              "💡 Example: <i>Artificial Intelligence and its future</i>"
+    },
+    "presentation_summary": {
+        "uz": "📋 <b>Taqdimot Haqida</b>\n\n"
+              "📌 <b>Mavzu:</b> {topic}\n"
+              "📦 <b>Paket:</b> {package}\n"
+              "🎨 <b>Dizayn:</b> {template}\n"
+              "📄 <b>Sahifalar soni:</b> {slides} ta\n"
+              "🌐 <b>Til:</b> {lang_name}\n"
+              "💰 <b>Narx:</b> {price} so'm\n\n"
+              "👉 Ushbu sozlamalar asosida slaydingiz yaratiladi.\n"
+              "Davom etish uchun <b>✅ Yaratish</b> tugmasini bosing.",
+        "ru": "📋 <b>О презентации</b>\n\n"
+              "📌 <b>Тема:</b> {topic}\n"
+              "📦 <b>Пакет:</b> {package}\n"
+              "🎨 <b>Дизайн:</b> {template}\n"
+              "📄 <b>Количество страниц:</b> {slides}\n"
+              "🌐 <b>Язык:</b> {lang_name}\n"
+              "💰 <b>Цена:</b> {price} сум\n\n"
+              "👉 Презентация будет создана с этими настройками.\n"
+              "Для продолжения нажмите <b>✅ Создать</b>.",
+        "en": "📋 <b>Presentation Info</b>\n\n"
+              "📌 <b>Topic:</b> {topic}\n"
+              "📦 <b>Package:</b> {package}\n"
+              "🎨 <b>Design:</b> {template}\n"
+              "📄 <b>Number of slides:</b> {slides}\n"
+              "🌐 <b>Language:</b> {lang_name}\n"
+              "💰 <b>Price:</b> {price} sum\n\n"
+              "👉 Your presentation will be created with these settings.\n"
+              "Press <b>✅ Create</b> to continue."
     },
     "presentation_generating": {
         "uz": "⏳ Taqdimot tayyorlanmoqda...\n\n📊 Mavzu: {topic}\n🎨 Dizayn: {template}\n📄 Sahifalar: {slides}\n💰 Narx: {price} so'm\n\nBu 1-3 daqiqa vaqt olishi mumkin.",
@@ -282,6 +330,28 @@ TEXTS = {
               "⭐ Premium presentation: 4,000 - 8,000 sum\n"
               "✍️ Text writing: 3,000 sum\n\n"
               "🛒 Top up balance: /buy"
+    },
+
+    # ===== Progress =====
+    "progress_step1": {
+        "uz": "📝 Rejalar yaratilmoqda...",
+        "ru": "📝 Создание плана...",
+        "en": "📝 Creating outline..."
+    },
+    "progress_step2": {
+        "uz": "✍️ Matnlar yozilmoqda...",
+        "ru": "✍️ Написание текстов...",
+        "en": "✍️ Writing content..."
+    },
+    "progress_step3": {
+        "uz": "🎨 Dizayn qo'llanilmoqda...",
+        "ru": "🎨 Применение дизайна...",
+        "en": "🎨 Applying design..."
+    },
+    "progress_step4": {
+        "uz": "✅ Taqdimot tayyor!",
+        "ru": "✅ Презентация готова!",
+        "en": "✅ Presentation is ready!"
     },
 
     # ===== Xatoliklar =====

@@ -38,9 +38,9 @@ PRESENTATION_PACKAGES = {
         "description_en": "Professional presentation with stock photos",
     },
     "premium": {
-        "name_uz": "⭐ Premium taqdimot",
-        "name_ru": "⭐ Премиум презентация",
-        "name_en": "⭐ Premium presentation",
+        "name_uz": "⭐ Premium taqdimot (Rasm/Diagramma)",
+        "name_ru": "⭐ Премиум презентация (Фото/Диаграммы)",
+        "name_en": "⭐ Premium presentation (Images/Charts)",
         "has_ai_images": True,
         "has_diagrams": True,
         "description_uz": "AI rasmlar va diagrammalar bilan yuqori sifatli taqdimot",
@@ -49,14 +49,25 @@ PRESENTATION_PACKAGES = {
     },
 }
 
-# Sahifalar soni va narxlari
-SLIDE_COUNT_OPTIONS = {
-    5: {"standard": 2000, "premium": 4000},
-    10: {"standard": 3000, "premium": 5000},
-    15: {"standard": 3000, "premium": 6000},
-    20: {"standard": 4000, "premium": 7000},
-    25: {"standard": 5000, "premium": 8000},
-}
+# Sahifalar soni va narxlari (6-30 gacha)
+SLIDE_COUNT_OPTIONS = {}
+for i in range(6, 31):
+    if i <= 10:
+        std_price = 1500 + (i - 6) * 250
+        prm_price = 3500 + (i - 6) * 250
+    elif i <= 15:
+        std_price = 2500 + (i - 10) * 100
+        prm_price = 4500 + (i - 10) * 300
+    elif i <= 20:
+        std_price = 3000 + (i - 15) * 200
+        prm_price = 6000 + (i - 15) * 200
+    elif i <= 25:
+        std_price = 4000 + (i - 20) * 200
+        prm_price = 7000 + (i - 20) * 200
+    else:
+        std_price = 5000 + (i - 25) * 100
+        prm_price = 8000 + (i - 25) * 100
+    SLIDE_COUNT_OPTIONS[i] = {"standard": int(std_price), "premium": int(prm_price)}
 
 # Matn yozish narxi
 TEXT_WRITING_PRICE = int(os.environ.get("TEXT_WRITING_PRICE", "3000"))
@@ -74,20 +85,108 @@ BALANCE_PACKAGES = {
     "120000": {"amount": 120000, "label": "120,000 so'm"},
 }
 
-# Taqdimot dizayn shablonlari
+# Taqdimot dizayn shablonlari (@aislidebot uslubida)
 PRESENTATION_TEMPLATES = {
-    "business": {"name_uz": "Biznes", "name_ru": "Бизнес", "name_en": "Business",
-                 "color_primary": "1F4E79", "color_secondary": "2E75B6", "color_accent": "BDD7EE", "color_text": "FFFFFF"},
-    "education": {"name_uz": "Ta'lim", "name_ru": "Образование", "name_en": "Education",
-                  "color_primary": "2E7D32", "color_secondary": "43A047", "color_accent": "C8E6C9", "color_text": "FFFFFF"},
-    "technology": {"name_uz": "Texnologiya", "name_ru": "Технологии", "name_en": "Technology",
-                   "color_primary": "283593", "color_secondary": "3949AB", "color_accent": "C5CAE9", "color_text": "FFFFFF"},
-    "medical": {"name_uz": "Tibbiyot", "name_ru": "Медицина", "name_en": "Medical",
-                "color_primary": "00838F", "color_secondary": "00ACC1", "color_accent": "B2EBF2", "color_text": "FFFFFF"},
-    "creative": {"name_uz": "Ijodiy", "name_ru": "Креативный", "name_en": "Creative",
-                 "color_primary": "6A1B9A", "color_secondary": "8E24AA", "color_accent": "E1BEE7", "color_text": "FFFFFF"},
-    "minimal": {"name_uz": "Minimalist", "name_ru": "Минималист", "name_en": "Minimal",
-                "color_primary": "37474F", "color_secondary": "546E7A", "color_accent": "CFD8DC", "color_text": "FFFFFF"},
+    "business": {
+        "name_uz": "💼 Biznes va Tadbirkorlik",
+        "name_ru": "💼 Бизнес и Предпринимательство",
+        "name_en": "💼 Business & Entrepreneurship",
+        "color_primary": "1a365d",
+        "color_secondary": "2a4365",
+        "color_accent": "bee3f8",
+        "color_text": "ffffff",
+        "color_body": "2d3748",
+    },
+    "education": {
+        "name_uz": "🎓 Ta'lim va Kasbiy Rivojlanish",
+        "name_ru": "🎓 Образование и Развитие",
+        "name_en": "🎓 Education & Development",
+        "color_primary": "1a4731",
+        "color_secondary": "276749",
+        "color_accent": "c6f6d5",
+        "color_text": "ffffff",
+        "color_body": "2d3748",
+    },
+    "technology": {
+        "name_uz": "💻 Texnologiya va IT",
+        "name_ru": "💻 Технологии и IT",
+        "name_en": "💻 Technology & IT",
+        "color_primary": "1a202c",
+        "color_secondary": "2d3748",
+        "color_accent": "63b3ed",
+        "color_text": "63b3ed",
+        "color_body": "e2e8f0",
+    },
+    "medical": {
+        "name_uz": "🏥 Sport, Salomatlik va Tibbiyot",
+        "name_ru": "🏥 Спорт, Здоровье и Медицина",
+        "name_en": "🏥 Sports, Health & Medicine",
+        "color_primary": "00838F",
+        "color_secondary": "00ACC1",
+        "color_accent": "B2EBF2",
+        "color_text": "ffffff",
+        "color_body": "2d3748",
+    },
+    "creative": {
+        "name_uz": "🎨 San'at va Madaniyat",
+        "name_ru": "🎨 Искусство и Культура",
+        "name_en": "🎨 Art & Culture",
+        "color_primary": "553c9a",
+        "color_secondary": "6b46c1",
+        "color_accent": "e9d8fd",
+        "color_text": "ffffff",
+        "color_body": "2d3748",
+    },
+    "minimal": {
+        "name_uz": "📋 Minimalist",
+        "name_ru": "📋 Минималист",
+        "name_en": "📋 Minimalist",
+        "color_primary": "37474F",
+        "color_secondary": "546E7A",
+        "color_accent": "CFD8DC",
+        "color_text": "ffffff",
+        "color_body": "4a5568",
+    },
+    "history": {
+        "name_uz": "📜 Tarix va Siyosat",
+        "name_ru": "📜 История и Политика",
+        "name_en": "📜 History & Politics",
+        "color_primary": "7b341e",
+        "color_secondary": "9c4221",
+        "color_accent": "feebc8",
+        "color_text": "ffffff",
+        "color_body": "2d3748",
+    },
+    "nature": {
+        "name_uz": "🌿 Atrof-muhit va Barqarorlik",
+        "name_ru": "🌿 Экология и Устойчивость",
+        "name_en": "🌿 Environment & Sustainability",
+        "color_primary": "22543d",
+        "color_secondary": "276749",
+        "color_accent": "c6f6d5",
+        "color_text": "ffffff",
+        "color_body": "2d3748",
+    },
+    "entertainment": {
+        "name_uz": "🎬 Ko'ngil-ochar va Media",
+        "name_ru": "🎬 Развлечения и Медиа",
+        "name_en": "🎬 Entertainment & Media",
+        "color_primary": "702459",
+        "color_secondary": "97266d",
+        "color_accent": "fed7e2",
+        "color_text": "ffffff",
+        "color_body": "2d3748",
+    },
+    "personal": {
+        "name_uz": "🧑‍💼 Shaxsiy Rivojlanish",
+        "name_ru": "🧑‍💼 Личное Развитие",
+        "name_en": "🧑‍💼 Personal Growth",
+        "color_primary": "2a4365",
+        "color_secondary": "2c5282",
+        "color_accent": "bee3f8",
+        "color_text": "ffffff",
+        "color_body": "e2e8f0",
+    },
 }
 
 # Ma'lumotlar bazasi

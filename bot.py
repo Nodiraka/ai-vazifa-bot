@@ -1,4 +1,4 @@
-"""AI Vazifa Bot - Asosiy bot fayli"""
+"""AI Vazifa Bot - @aislidebot uslubida professional bot"""
 
 import os
 import json
@@ -38,8 +38,8 @@ logger = logging.getLogger(__name__)
 
 # Conversation states
 (LANG_SELECT, MAIN_MENU, PRES_PACKAGE, PRES_SLIDES, PRES_TEMPLATE, PRES_TOPIC,
- TEXT_TYPE, TEXT_TOPIC, PAYMENT_PACKAGE, PAYMENT_RECEIPT,
- ADMIN_BROADCAST) = range(11)
+ PRES_CONFIRM, TEXT_TYPE, TEXT_TOPIC, PAYMENT_PACKAGE, PAYMENT_RECEIPT,
+ ADMIN_BROADCAST) = range(12)
 
 # Output directory
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
@@ -98,6 +98,43 @@ def language_keyboard() -> InlineKeyboardMarkup:
             InlineKeyboardButton("🇬🇧 English", callback_data="lang_en")
         ]
     ]
+    return InlineKeyboardMarkup(keyboard)
+
+
+def slides_grid_keyboard(lang: str, package_key: str) -> InlineKeyboardMarkup:
+    """@aislidebot uslubida 6-30 gacha grid tugmalar"""
+    keyboard = []
+    row = []
+    for i in range(6, 31):
+        row.append(InlineKeyboardButton(str(i), callback_data=f"slides_{i}"))
+        if len(row) == 5:
+            keyboard.append(row)
+            row = []
+    if row:
+        keyboard.append(row)
+    keyboard.append([InlineKeyboardButton(t("btn_cancel", lang), callback_data="menu_back")])
+    return InlineKeyboardMarkup(keyboard)
+
+
+def template_keyboard(lang: str) -> InlineKeyboardMarkup:
+    """Dizayn tanlash tugmalari - @aislidebot uslubida"""
+    templates = list(PRESENTATION_TEMPLATES.items())
+    keyboard = []
+    for i in range(0, len(templates), 2):
+        row = []
+        key1, tmpl1 = templates[i]
+        row.append(InlineKeyboardButton(
+            tmpl1.get(f"name_{lang}", tmpl1["name_uz"]),
+            callback_data=f"tmpl_{key1}"
+        ))
+        if i + 1 < len(templates):
+            key2, tmpl2 = templates[i + 1]
+            row.append(InlineKeyboardButton(
+                tmpl2.get(f"name_{lang}", tmpl2["name_uz"]),
+                callback_data=f"tmpl_{key2}"
+            ))
+        keyboard.append(row)
+    keyboard.append([InlineKeyboardButton(t("btn_back", lang), callback_data="menu_back")])
     return InlineKeyboardMarkup(keyboard)
 
 
@@ -277,29 +314,10 @@ async def presentation_package_selected(update: Update, context) -> int:
     package_key = data.replace("pkg_", "")
     context.user_data["pres_package"] = package_key
 
-    # 2-qadam: Sahifalar soni tanlash
-    balance = get_user_balance(user_id)
-    keyboard = []
-    prices_lines = []
-
-    for slides, prices in sorted(SLIDE_COUNT_OPTIONS.items()):
-        price = prices[package_key]
-        label = f"📄 {slides} sahifa - {format_sum(price)} so'm"
-        can_afford = balance >= price
-        if can_afford:
-            keyboard.append([InlineKeyboardButton(label, callback_data=f"slides_{slides}")])
-        else:
-            keyboard.append([InlineKeyboardButton(f"🔒 {slides} sahifa - {format_sum(price)} so'm", callback_data=f"slides_{slides}")])
-
-        prices_lines.append(f"📄 {slides} sahifa: {format_sum(price)} so'm")
-
-    keyboard.append([InlineKeyboardButton(t("btn_back", lang), callback_data="menu_back")])
-
-    prices_text = "\n".join(prices_lines)
-
+    # 2-qadam: Slaydlar soni tanlash (6-30 grid)
     await query.edit_message_text(
-        text=t("presentation_choose_slides", lang, prices_text=prices_text),
-        reply_markup=InlineKeyboardMarkup(keyboard),
+        text=t("presentation_choose_slides", lang),
+        reply_markup=slides_grid_keyboard(lang, package_key),
         parse_mode=ParseMode.HTML
     )
     return PRES_SLIDES
@@ -341,24 +359,9 @@ async def presentation_slides_selected(update: Update, context) -> int:
     context.user_data["pres_price"] = price
 
     # 3-qadam: Dizayn tanlash
-    keyboard = [
-        [
-            InlineKeyboardButton(t("btn_template_business", lang), callback_data="tmpl_business"),
-            InlineKeyboardButton(t("btn_template_education", lang), callback_data="tmpl_education"),
-        ],
-        [
-            InlineKeyboardButton(t("btn_template_technology", lang), callback_data="tmpl_technology"),
-            InlineKeyboardButton(t("btn_template_medical", lang), callback_data="tmpl_medical"),
-        ],
-        [
-            InlineKeyboardButton(t("btn_template_creative", lang), callback_data="tmpl_creative"),
-            InlineKeyboardButton(t("btn_template_minimal", lang), callback_data="tmpl_minimal"),
-        ],
-        [InlineKeyboardButton(t("btn_back", lang), callback_data="menu_back")]
-    ]
     await query.edit_message_text(
         text=t("presentation_choose_template", lang),
-        reply_markup=InlineKeyboardMarkup(keyboard),
+        reply_markup=template_keyboard(lang),
         parse_mode=ParseMode.HTML
     )
     return PRES_TEMPLATE
@@ -384,20 +387,78 @@ async def presentation_template_selected(update: Update, context) -> int:
     context.user_data["pres_template"] = template_key
 
     # 4-qadam: Mavzu yozish
-    keyboard = [[InlineKeyboardButton(t("btn_back", lang), callback_data="menu_back")]]
+    keyboard = [[InlineKeyboardButton(t("btn_cancel", lang), callback_data="menu_back")]]
     await query.edit_message_text(
         text=t("presentation_topic", lang),
-        reply_markup=InlineKeyboardMarkup(keyboard)
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode=ParseMode.HTML
     )
     return PRES_TOPIC
 
 
-# ===== Taqdimot - 4-qadam: Mavzu va yaratish =====
+# ===== Taqdimot - 4-qadam: Mavzu kiritish va xulosa ko'rsatish =====
 async def presentation_topic_received(update: Update, context) -> int:
     lang = get_user_lang(context)
     user_id = update.effective_user.id
     topic = update.message.text
 
+    context.user_data["pres_topic"] = topic
+
+    package_key = context.user_data.get("pres_package", "standard")
+    slides_count = context.user_data.get("pres_slides", 10)
+    price = context.user_data.get("pres_price", 3000)
+    template_key = context.user_data.get("pres_template", "business")
+
+    # Paket nomi
+    package_info = PRESENTATION_PACKAGES.get(package_key, {})
+    package_name = package_info.get(f"name_{lang}", package_info.get("name_uz", ""))
+
+    # Shablon nomi
+    template_info = PRESENTATION_TEMPLATES.get(template_key, {})
+    template_name = template_info.get(f"name_{lang}", template_info.get("name_uz", template_key))
+
+    # Til nomi
+    lang_names = {"uz": "🇺🇿 O'zbekcha", "ru": "🇷🇺 Русский", "en": "🇬🇧 English"}
+    lang_name = lang_names.get(lang, "O'zbekcha")
+
+    # Xulosa ko'rsatish
+    keyboard = [
+        [InlineKeyboardButton(t("btn_create", lang), callback_data="pres_create")],
+        [InlineKeyboardButton(t("btn_cancel", lang), callback_data="menu_back")]
+    ]
+
+    await update.message.reply_text(
+        text=t("presentation_summary", lang,
+               topic=topic,
+               package=package_name,
+               template=template_name,
+               slides=slides_count,
+               lang_name=lang_name,
+               price=format_sum(price)),
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode=ParseMode.HTML
+    )
+    return PRES_CONFIRM
+
+
+# ===== Taqdimot - 5-qadam: Tasdiqlash va yaratish =====
+async def presentation_confirm(update: Update, context) -> int:
+    query = update.callback_query
+    await query.answer()
+    lang = get_user_lang(context)
+    user_id = query.from_user.id
+    data = query.data
+
+    if data == "menu_back":
+        balance = get_user_balance(user_id)
+        await query.edit_message_text(
+            text=t("welcome_back", lang, balance=format_sum(balance)),
+            reply_markup=main_menu_keyboard(lang)
+        )
+        return MAIN_MENU
+
+    # Ma'lumotlarni olish
+    topic = context.user_data.get("pres_topic", "")
     package_key = context.user_data.get("pres_package", "standard")
     slides_count = context.user_data.get("pres_slides", 10)
     price = context.user_data.get("pres_price", 3000)
@@ -406,11 +467,14 @@ async def presentation_topic_received(update: Update, context) -> int:
     package_info = PRESENTATION_PACKAGES.get(package_key, {})
     has_ai_images = package_info.get("has_ai_images", False)
 
+    template_info = PRESENTATION_TEMPLATES.get(template_key, {})
+    template_name = template_info.get(f"name_{lang}", template_info.get("name_uz", template_key))
+
     # Balansdan yechish
     if not deduct_balance(user_id, price):
         balance = get_user_balance(user_id)
         keyboard = [[InlineKeyboardButton(t("btn_back", lang), callback_data="menu_back")]]
-        await update.message.reply_text(
+        await query.edit_message_text(
             text=t("not_enough_balance", lang,
                    balance=format_sum(balance),
                    needed=format_sum(price)),
@@ -418,32 +482,59 @@ async def presentation_topic_received(update: Update, context) -> int:
         )
         return MAIN_MENU
 
-    # Shablon nomini olish
-    template_info = PRESENTATION_TEMPLATES.get(template_key, {})
-    template_name = template_info.get(f"name_{lang}", template_info.get("name_uz", template_key))
+    # Progress ko'rsatish
+    progress_steps = [
+        t("progress_step1", lang),
+        t("progress_step2", lang),
+        t("progress_step3", lang),
+        t("progress_step4", lang),
+    ]
 
-    status_msg = await update.message.reply_text(
-        t("presentation_generating", lang,
-          topic=topic, template=template_name,
-          slides=slides_count, price=format_sum(price))
+    await query.edit_message_text(
+        text=t("presentation_generating", lang,
+               topic=topic, template=template_name,
+               slides=slides_count, price=format_sum(price)),
+        parse_mode=ParseMode.HTML
     )
 
+    # Progress yangilash
+    status_msg = query.message
+
     try:
+        # 1-qadam: Rejalar yaratilmoqda
+        await asyncio.sleep(1)
+        try:
+            await status_msg.edit_text(
+                text=f"✏️ ... \n\n{progress_steps[0]}",
+                parse_mode=ParseMode.HTML
+            )
+        except:
+            pass
+
         file_path = await generate_presentation(
             topic, slides_count, lang, OUTPUT_DIR,
             template_key=template_key,
             has_ai_images=has_ai_images
         )
 
+        # Tayyor
+        try:
+            await status_msg.edit_text(
+                text=f"✅ {progress_steps[3]}",
+                parse_mode=ParseMode.HTML
+            )
+        except:
+            pass
+
         with open(file_path, "rb") as f:
-            await update.message.reply_document(
+            await context.bot.send_document(
+                chat_id=user_id,
                 document=f,
                 filename=os.path.basename(file_path),
                 caption=t("presentation_ready", lang)
             )
 
         increment_tasks(user_id)
-        await status_msg.delete()
 
         try:
             os.remove(file_path)
@@ -453,10 +544,14 @@ async def presentation_topic_received(update: Update, context) -> int:
     except Exception as e:
         logger.error(f"Taqdimot yaratishda xatolik: {e}")
         update_balance(user_id, price)
-        await status_msg.edit_text(t("error_ai", lang))
+        try:
+            await status_msg.edit_text(t("error_ai", lang))
+        except:
+            await context.bot.send_message(chat_id=user_id, text=t("error_ai", lang))
 
     balance = get_user_balance(user_id)
-    await update.message.reply_text(
+    await context.bot.send_message(
+        chat_id=user_id,
         text=t("welcome_back", lang, balance=format_sum(balance)),
         reply_markup=main_menu_keyboard(lang)
     )
@@ -478,7 +573,7 @@ async def text_type_selected(update: Update, context) -> int:
     }
     type_name = type_names.get(text_type, {}).get(lang, text_type)
 
-    keyboard = [[InlineKeyboardButton(t("btn_back", lang), callback_data="menu_back")]]
+    keyboard = [[InlineKeyboardButton(t("btn_cancel", lang), callback_data="menu_back")]]
     await query.edit_message_text(
         text=t("text_topic", lang, text_type=type_name),
         reply_markup=InlineKeyboardMarkup(keyboard)
@@ -849,6 +944,9 @@ def main():
             PRES_TOPIC: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, presentation_topic_received),
                 CallbackQueryHandler(handle_back_button, pattern="^menu_back$"),
+            ],
+            PRES_CONFIRM: [
+                CallbackQueryHandler(presentation_confirm, pattern="^(pres_create|menu_back)"),
             ],
             TEXT_TYPE: [
                 CallbackQueryHandler(text_type_selected, pattern="^text_"),
