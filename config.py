@@ -25,12 +25,37 @@ ADMIN_IDS = [int(x) for x in os.environ.get("ADMIN_IDS", "345375880").split(",")
 # Narxlar tizimi (so'mda)
 NEW_USER_BALANCE = int(os.environ.get("NEW_USER_BALANCE", "15000"))
 
-# Taqdimot narxlari
-PRESENTATION_PRICES = {
-    "standard_15": {"price": 3000, "max_slides": 15, "label": "Oddiy (15 gacha)", "has_ai_images": False},
-    "standard_25": {"price": 5000, "max_slides": 25, "label": "Oddiy (25 gacha)", "has_ai_images": False},
-    "premium_15": {"price": 6000, "max_slides": 15, "label": "Premium (15 gacha)", "has_ai_images": True},
-    "premium_25": {"price": 8000, "max_slides": 25, "label": "Premium (25 gacha)", "has_ai_images": True},
+# Taqdimot paketlari (2 ta asosiy paket)
+PRESENTATION_PACKAGES = {
+    "standard": {
+        "name_uz": "📋 Oddiy taqdimot",
+        "name_ru": "📋 Обычная презентация",
+        "name_en": "📋 Standard presentation",
+        "has_ai_images": False,
+        "has_diagrams": False,
+        "description_uz": "Stock fotolar bilan professional taqdimot",
+        "description_ru": "Профессиональная презентация со стоковыми фото",
+        "description_en": "Professional presentation with stock photos",
+    },
+    "premium": {
+        "name_uz": "⭐ Premium taqdimot",
+        "name_ru": "⭐ Премиум презентация",
+        "name_en": "⭐ Premium presentation",
+        "has_ai_images": True,
+        "has_diagrams": True,
+        "description_uz": "AI rasmlar va diagrammalar bilan yuqori sifatli taqdimot",
+        "description_ru": "Высококачественная презентация с AI изображениями и диаграммами",
+        "description_en": "High-quality presentation with AI images and diagrams",
+    },
+}
+
+# Sahifalar soni va narxlari
+SLIDE_COUNT_OPTIONS = {
+    5: {"standard": 2000, "premium": 4000},
+    10: {"standard": 3000, "premium": 5000},
+    15: {"standard": 3000, "premium": 6000},
+    20: {"standard": 4000, "premium": 7000},
+    25: {"standard": 5000, "premium": 8000},
 }
 
 # Matn yozish narxi
@@ -49,7 +74,7 @@ BALANCE_PACKAGES = {
     "120000": {"amount": 120000, "label": "120,000 so'm"},
 }
 
-# Taqdimot shablonlari
+# Taqdimot dizayn shablonlari
 PRESENTATION_TEMPLATES = {
     "business": {"name_uz": "Biznes", "name_ru": "Бизнес", "name_en": "Business",
                  "color_primary": "1F4E79", "color_secondary": "2E75B6", "color_accent": "BDD7EE", "color_text": "FFFFFF"},

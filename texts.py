@@ -84,44 +84,47 @@ TEXTS = {
         "en": "⬅️ Back"
     },
 
-    # ===== Taqdimot - Paket tanlash =====
+    # ===== Taqdimot - 1-qadam: Paket tanlash =====
     "presentation_choose_package": {
-        "uz": "📊 Taqdimot paketini tanlang:\n\n"
-              "📋 <b>Oddiy</b> - stock fotolar bilan\n"
-              "⭐ <b>Premium</b> - AI rasmlar bilan\n",
-        "ru": "📊 Выберите пакет презентации:\n\n"
-              "📋 <b>Обычный</b> - со стоковыми фото\n"
-              "⭐ <b>Премиум</b> - с AI изображениями\n",
-        "en": "📊 Choose presentation package:\n\n"
-              "📋 <b>Standard</b> - with stock photos\n"
-              "⭐ <b>Premium</b> - with AI images\n"
+        "uz": "📊 <b>Taqdimot turini tanlang:</b>\n\n"
+              "📋 <b>Oddiy taqdimot</b>\n"
+              "   Stock fotolar bilan professional taqdimot\n\n"
+              "⭐ <b>Premium taqdimot</b>\n"
+              "   AI rasmlar va diagrammalar bilan yuqori sifatli taqdimot",
+        "ru": "📊 <b>Выберите тип презентации:</b>\n\n"
+              "📋 <b>Обычная презентация</b>\n"
+              "   Профессиональная презентация со стоковыми фото\n\n"
+              "⭐ <b>Премиум презентация</b>\n"
+              "   Высококачественная презентация с AI изображениями и диаграммами",
+        "en": "📊 <b>Choose presentation type:</b>\n\n"
+              "📋 <b>Standard presentation</b>\n"
+              "   Professional presentation with stock photos\n\n"
+              "⭐ <b>Premium presentation</b>\n"
+              "   High-quality presentation with AI images and diagrams"
     },
-    "btn_standard_15": {
-        "uz": "📋 Oddiy (15 gacha) - 3,000 so'm",
-        "ru": "📋 Обычный (до 15) - 3,000 сум",
-        "en": "📋 Standard (up to 15) - 3,000 sum"
+    "btn_package_standard": {
+        "uz": "📋 Oddiy taqdimot",
+        "ru": "📋 Обычная презентация",
+        "en": "📋 Standard presentation"
     },
-    "btn_standard_25": {
-        "uz": "📋 Oddiy (25 gacha) - 5,000 so'm",
-        "ru": "📋 Обычный (до 25) - 5,000 сум",
-        "en": "📋 Standard (up to 25) - 5,000 sum"
-    },
-    "btn_premium_15": {
-        "uz": "⭐ Premium (15 gacha) - 6,000 so'm",
-        "ru": "⭐ Премиум (до 15) - 6,000 сум",
-        "en": "⭐ Premium (up to 15) - 6,000 sum"
-    },
-    "btn_premium_25": {
-        "uz": "⭐ Premium (25 gacha) - 8,000 so'm",
-        "ru": "⭐ Премиум (до 25) - 8,000 сум",
-        "en": "⭐ Premium (up to 25) - 8,000 sum"
+    "btn_package_premium": {
+        "uz": "⭐ Premium taqdimot",
+        "ru": "⭐ Премиум презентация",
+        "en": "⭐ Premium presentation"
     },
 
-    # ===== Taqdimot - Shablon tanlash =====
+    # ===== Taqdimot - 2-qadam: Sahifalar soni =====
+    "presentation_choose_slides": {
+        "uz": "📄 <b>Sahifalar sonini tanlang:</b>\n\n{prices_text}",
+        "ru": "📄 <b>Выберите количество страниц:</b>\n\n{prices_text}",
+        "en": "📄 <b>Choose number of slides:</b>\n\n{prices_text}"
+    },
+
+    # ===== Taqdimot - 3-qadam: Dizayn tanlash =====
     "presentation_choose_template": {
-        "uz": "🎨 Dizayn shablonini tanlang:",
-        "ru": "🎨 Выберите шаблон дизайна:",
-        "en": "🎨 Choose design template:"
+        "uz": "🎨 <b>Dizaynni tanlang:</b>",
+        "ru": "🎨 <b>Выберите дизайн:</b>",
+        "en": "🎨 <b>Choose design:</b>"
     },
     "btn_template_business": {
         "uz": "💼 Biznes",
@@ -154,31 +157,21 @@ TEXTS = {
         "en": "⬜ Minimal"
     },
 
-    # ===== Taqdimot - Mavzu va slayd soni =====
+    # ===== Taqdimot - 4-qadam: Mavzu =====
     "presentation_topic": {
         "uz": "📊 Taqdimot mavzusini yozing:\n\n(Masalan: \"Suniy intellekt va uning kelajagi\")",
         "ru": "📊 Напишите тему презентации:\n\n(Например: \"Искусственный интеллект и его будущее\")",
         "en": "📊 Write the presentation topic:\n\n(Example: \"Artificial Intelligence and its future\")"
     },
-    "presentation_slides_count": {
-        "uz": "📊 Nechta slayd bo'lsin? ({min_slides}-{max_slides} oralig'ida raqam yozing)",
-        "ru": "📊 Сколько слайдов? (Напишите число от {min_slides} до {max_slides})",
-        "en": "📊 How many slides? (Write a number between {min_slides}-{max_slides})"
-    },
     "presentation_generating": {
-        "uz": "⏳ Taqdimot tayyorlanmoqda...\n\n📊 Mavzu: {topic}\n🎨 Shablon: {template}\n📄 Slaydlar: {slides}\n\nBu 1-3 daqiqa vaqt olishi mumkin.",
-        "ru": "⏳ Презентация готовится...\n\n📊 Тема: {topic}\n🎨 Шаблон: {template}\n📄 Слайды: {slides}\n\nЭто может занять 1-3 минуты.",
-        "en": "⏳ Generating presentation...\n\n📊 Topic: {topic}\n🎨 Template: {template}\n📄 Slides: {slides}\n\nThis may take 1-3 minutes."
+        "uz": "⏳ Taqdimot tayyorlanmoqda...\n\n📊 Mavzu: {topic}\n🎨 Dizayn: {template}\n📄 Sahifalar: {slides}\n💰 Narx: {price} so'm\n\nBu 1-3 daqiqa vaqt olishi mumkin.",
+        "ru": "⏳ Презентация готовится...\n\n📊 Тема: {topic}\n🎨 Дизайн: {template}\n📄 Страницы: {slides}\n💰 Цена: {price} сум\n\nЭто может занять 1-3 минуты.",
+        "en": "⏳ Generating presentation...\n\n📊 Topic: {topic}\n🎨 Design: {template}\n📄 Slides: {slides}\n💰 Price: {price} sum\n\nThis may take 1-3 minutes."
     },
     "presentation_ready": {
         "uz": "✅ Taqdimot tayyor! Yuklab oling:",
         "ru": "✅ Презентация готова! Скачайте:",
         "en": "✅ Presentation is ready! Download:"
-    },
-    "invalid_slides_count": {
-        "uz": "❌ Iltimos, {min_slides} dan {max_slides} gacha raqam kiriting.",
-        "ru": "❌ Пожалуйста, введите число от {min_slides} до {max_slides}.",
-        "en": "❌ Please enter a number between {min_slides} and {max_slides}."
     },
 
     # ===== Matn yozish =====
@@ -220,30 +213,24 @@ TEXTS = {
 
     # ===== Balans =====
     "balance_info": {
-        "uz": "💰 Sizning balansingiz: {balance} so'm\n\n"
+        "uz": "💰 Sizning balansingiz: <b>{balance} so'm</b>\n\n"
               "📊 <b>Taqdimot narxlari:</b>\n"
-              "  📋 Oddiy (15 gacha): 3,000 so'm\n"
-              "  📋 Oddiy (25 gacha): 5,000 so'm\n"
-              "  ⭐ Premium (15 gacha): 6,000 so'm\n"
-              "  ⭐ Premium (25 gacha): 8,000 so'm\n\n"
+              "  📋 Oddiy:   2,000 - 5,000 so'm\n"
+              "  ⭐ Premium: 4,000 - 8,000 so'm\n\n"
               "✍️ <b>Matn yozish:</b> {text_price} so'm\n\n"
               "➖➖➖➖➖➖➖➖➖➖\n"
               "Balansni to'ldirish uchun: /buy",
-        "ru": "💰 Ваш баланс: {balance} сум\n\n"
+        "ru": "💰 Ваш баланс: <b>{balance} сум</b>\n\n"
               "📊 <b>Цены на презентации:</b>\n"
-              "  📋 Обычный (до 15): 3,000 сум\n"
-              "  📋 Обычный (до 25): 5,000 сум\n"
-              "  ⭐ Премиум (до 15): 6,000 сум\n"
-              "  ⭐ Премиум (до 25): 8,000 сум\n\n"
+              "  📋 Обычная:  2,000 - 5,000 сум\n"
+              "  ⭐ Премиум: 4,000 - 8,000 сум\n\n"
               "✍️ <b>Написание текста:</b> {text_price} сум\n\n"
               "➖➖➖➖➖➖➖➖➖➖\n"
               "Пополнить баланс: /buy",
-        "en": "💰 Your balance: {balance} sum\n\n"
+        "en": "💰 Your balance: <b>{balance} sum</b>\n\n"
               "📊 <b>Presentation prices:</b>\n"
-              "  📋 Standard (up to 15): 3,000 sum\n"
-              "  📋 Standard (up to 25): 5,000 sum\n"
-              "  ⭐ Premium (up to 15): 6,000 sum\n"
-              "  ⭐ Premium (up to 25): 8,000 sum\n\n"
+              "  📋 Standard: 2,000 - 5,000 sum\n"
+              "  ⭐ Premium:  4,000 - 8,000 sum\n\n"
               "✍️ <b>Text writing:</b> {text_price} sum\n\n"
               "➖➖➖➖➖➖➖➖➖➖\n"
               "Top up balance: /buy"
@@ -275,30 +262,24 @@ TEXTS = {
               "📊 <b>Taqdimot yaratish</b> - mavzu yozing, bot PowerPoint taqdimot yaratib beradi\n"
               "✍️ <b>Matn yozish</b> - esse, maqola yoki referat yozdiring\n\n"
               "💰 <b>Narxlar:</b>\n"
-              "📋 Oddiy taqdimot (15 gacha): 3,000 so'm\n"
-              "📋 Oddiy taqdimot (25 gacha): 5,000 so'm\n"
-              "⭐ Premium taqdimot (15 gacha): 6,000 so'm\n"
-              "⭐ Premium taqdimot (25 gacha): 8,000 so'm\n"
+              "📋 Oddiy taqdimot: 2,000 - 5,000 so'm\n"
+              "⭐ Premium taqdimot: 4,000 - 8,000 so'm\n"
               "✍️ Matn yozish: 3,000 so'm\n\n"
               "🛒 Balansni to'ldirish: /buy",
         "ru": "❓ <b>Помощь</b>\n\nЭтот бот поможет вам с:\n\n"
               "📊 <b>Создание презентаций</b> - напишите тему, бот создаст PowerPoint\n"
               "✍️ <b>Написание текстов</b> - эссе, статьи или рефераты\n\n"
               "💰 <b>Цены:</b>\n"
-              "📋 Обычная презентация (до 15): 3,000 сум\n"
-              "📋 Обычная презентация (до 25): 5,000 сум\n"
-              "⭐ Премиум презентация (до 15): 6,000 сум\n"
-              "⭐ Премиум презентация (до 25): 8,000 сум\n"
+              "📋 Обычная презентация: 2,000 - 5,000 сум\n"
+              "⭐ Премиум презентация: 4,000 - 8,000 сум\n"
               "✍️ Написание текста: 3,000 сум\n\n"
               "🛒 Пополнить баланс: /buy",
         "en": "❓ <b>Help</b>\n\nThis bot helps you with:\n\n"
               "📊 <b>Create presentations</b> - write a topic, bot creates PowerPoint\n"
               "✍️ <b>Write texts</b> - essays, articles or reports\n\n"
               "💰 <b>Prices:</b>\n"
-              "📋 Standard presentation (up to 15): 3,000 sum\n"
-              "📋 Standard presentation (up to 25): 5,000 sum\n"
-              "⭐ Premium presentation (up to 15): 6,000 sum\n"
-              "⭐ Premium presentation (up to 25): 8,000 sum\n"
+              "📋 Standard presentation: 2,000 - 5,000 sum\n"
+              "⭐ Premium presentation: 4,000 - 8,000 sum\n"
               "✍️ Text writing: 3,000 sum\n\n"
               "🛒 Top up balance: /buy"
     },
