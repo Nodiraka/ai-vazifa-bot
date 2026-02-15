@@ -3,7 +3,7 @@
 import os
 
 # Telegram Bot Token
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "8468821654:AAEGfWl3EO5QAGu9dutfClC5E9mks2HFrjg")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 
 # OpenAI API
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
