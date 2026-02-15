@@ -483,44 +483,53 @@ async def presentation_confirm(update: Update, context) -> int:
         return MAIN_MENU
 
     # Progress ko'rsatish
-    progress_steps = [
-        t("progress_step1", lang),
-        t("progress_step2", lang),
-        t("progress_step3", lang),
-        t("progress_step4", lang),
-    ]
+    progress_steps = {
+        1: t("progress_step1", lang),
+        2: t("progress_step2", lang),
+        3: t("progress_step3", lang),
+        4: t("progress_step4", lang),
+    }
+
+    progress_emojis = {
+        1: "📝",
+        2: "🖼",
+        3: "🎨",
+        4: "✅",
+    }
 
     await query.edit_message_text(
-        text=t("presentation_generating", lang,
-               topic=topic, template=template_name,
-               slides=slides_count, price=format_sum(price)),
+        text=f"{progress_emojis[1]} {progress_steps[1]}",
         parse_mode=ParseMode.HTML
     )
 
-    # Progress yangilash
     status_msg = query.message
 
-    try:
-        # 1-qadam: Rejalar yaratilmoqda
-        await asyncio.sleep(1)
+    async def progress_callback(step: int, step_type: str):
+        """Progress yangilash callback"""
         try:
-            await status_msg.edit_text(
-                text=f"✏️ ... \n\n{progress_steps[0]}",
-                parse_mode=ParseMode.HTML
-            )
-        except:
-            pass
+            emoji = progress_emojis.get(step, "⏳")
+            text = progress_steps.get(step, "...")
+            # Progress bar
+            filled = step
+            total = 4
+            bar = "█" * filled + "░" * (total - filled)
+            progress_text = f"{emoji} {text}\n\n[{bar}] {step}/{total}"
+            await status_msg.edit_text(progress_text, parse_mode=ParseMode.HTML)
+        except Exception as e:
+            logger.warning(f"Progress yangilashda xatolik: {e}")
 
+    try:
         file_path = await generate_presentation(
             topic, slides_count, lang, OUTPUT_DIR,
             template_key=template_key,
-            has_ai_images=has_ai_images
+            has_ai_images=has_ai_images,
+            progress_callback=progress_callback
         )
 
         # Tayyor
         try:
             await status_msg.edit_text(
-                text=f"✅ {progress_steps[3]}",
+                text=f"✅ {progress_steps[4]}\n\n[████] 4/4",
                 parse_mode=ParseMode.HTML
             )
         except:
