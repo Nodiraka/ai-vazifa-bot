@@ -93,6 +93,11 @@ TEXTS = {
         "ru": "✅ Создать",
         "en": "✅ Create"
     },
+    "btn_choose_template": {
+        "uz": "🎨 Shablon tanlash",
+        "ru": "🎨 Выбрать шаблон",
+        "en": "🎨 Choose template"
+    },
 
     # ===== Taqdimot - 1-qadam: Paket tanlash =====
     "presentation_choose_package": {
