@@ -6,7 +6,7 @@ import logging
 import asyncio
 from telegram import (
     Update, InlineKeyboardButton, InlineKeyboardMarkup,
-    ReplyKeyboardMarkup, ReplyKeyboardRemove
+    ReplyKeyboardMarkup, ReplyKeyboardRemove, WebAppInfo
 )
 from telegram.ext import (
     Application, CommandHandler, CallbackQueryHandler,
@@ -358,13 +358,59 @@ async def presentation_slides_selected(update: Update, context) -> int:
     context.user_data["pres_slides"] = slides_count
     context.user_data["pres_price"] = price
 
-    # 3-qadam: Dizayn tanlash
+    # 3-qadam: Dizayn tanlash - Mini App orqali
+    keyboard = [
+        [InlineKeyboardButton(
+            t("btn_choose_template", lang),
+            web_app=WebAppInfo(url="https://nodiraka.github.io/bot-templates-miniapp/")
+        )],
+        [InlineKeyboardButton(t("btn_back", lang), callback_data="menu_back")]
+    ]
     await query.edit_message_text(
         text=t("presentation_choose_template", lang),
-        reply_markup=template_keyboard(lang),
+        reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode=ParseMode.HTML
     )
     return PRES_TEMPLATE
+
+
+# ===== Taqdimot - 3a-qadam: Mini App dan shablon ma'lumotini qabul qilish =====
+async def presentation_webapp_data(update: Update, context) -> int:
+    """Mini App dan shablon tanlash ma'lumotini qabul qilish"""
+    lang = get_user_lang(context)
+    user_id = update.effective_user.id
+    
+    try:
+        # Mini App dan kelgan ma'lumot
+        web_app_data = json.loads(update.effective_message.web_app_data.data)
+        
+        # {"category": "1_biznes_moliya", "id": 3}
+        category = web_app_data.get("category", "")
+        template_id = web_app_data.get("id", 1)
+        
+        # Template key yaratish
+        template_key = f"{category}_{template_id}"
+        context.user_data["pres_template"] = template_key
+        context.user_data["pres_template_category"] = category
+        context.user_data["pres_template_id"] = template_id
+        
+        # 4-qadam: Mavzu yozish
+        keyboard = [[InlineKeyboardButton(t("btn_cancel", lang), callback_data="menu_back")]]
+        await update.message.reply_text(
+            text=t("presentation_topic", lang),
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode=ParseMode.HTML
+        )
+        return PRES_TOPIC
+        
+    except Exception as e:
+        logger.error(f"WebApp data error: {e}")
+        keyboard = [[InlineKeyboardButton(t("btn_back", lang), callback_data="menu_back")]]
+        await update.message.reply_text(
+            text="❌ Xatolik yuz berdi. Qaytadan urinib ko'ring.",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+        return MAIN_MENU
 
 
 # ===== Taqdimot - 3-qadam: Dizayn tanlash =====
@@ -519,12 +565,28 @@ async def presentation_confirm(update: Update, context) -> int:
             logger.warning(f"Progress yangilashda xatolik: {e}")
 
     try:
-        file_path = await generate_presentation(
-            topic, slides_count, lang, OUTPUT_DIR,
-            template_key=template_key,
-            has_ai_images=has_ai_images,
-            progress_callback=progress_callback
-        )
+        # Template ma'lumotlarini olish
+        template_category = context.user_data.get("pres_template_category")
+        template_id = context.user_data.get("pres_template_id")
+        
+        # Agar template tanlangan bo'lsa - template asosida yaratish
+        if template_category and template_id:
+            from ai_service import generate_presentation_with_template
+            file_path = await generate_presentation_with_template(
+                topic, slides_count, lang, OUTPUT_DIR,
+                template_category=template_category,
+                template_id=template_id,
+                has_ai_images=has_ai_images,
+                progress_callback=progress_callback
+            )
+        else:
+            # Eski usul - scratch dan yaratish
+            file_path = await generate_presentation(
+                topic, slides_count, lang, OUTPUT_DIR,
+                template_key=template_key,
+                has_ai_images=has_ai_images,
+                progress_callback=progress_callback
+            )
 
         # Tayyor
         try:
@@ -948,6 +1010,7 @@ def main():
                 CallbackQueryHandler(presentation_slides_selected, pattern="^(slides_|menu_back)"),
             ],
             PRES_TEMPLATE: [
+                MessageHandler(filters.StatusUpdate.WEB_APP_DATA, presentation_webapp_data),
                 CallbackQueryHandler(presentation_template_selected, pattern="^(tmpl_|menu_back)"),
             ],
             PRES_TOPIC: [
