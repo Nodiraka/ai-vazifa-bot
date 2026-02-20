@@ -13,6 +13,7 @@ from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 from config import AI_MODEL, OPENAI_API_KEY, OPENAI_BASE_URL, PEXELS_API_KEY, PRESENTATION_TEMPLATES
+from template_handler import create_presentation_from_template
 
 logger = logging.getLogger(__name__)
 
@@ -659,3 +660,50 @@ IMPORTANT: All text must be written entirely in {lang_name} language. Use proper
     ))
 
     return response.choices[0].message.content.strip()
+
+
+# ===== YANGI: Template asosida taqdimot yaratish =====
+async def generate_presentation_with_template(
+    topic: str, slides_count: int, language: str,
+    output_dir: str, template_category: str, template_id: int,
+    has_ai_images: bool = False, progress_callback=None
+) -> str:
+    """Template fayl asosida taqdimot yaratish"""
+    
+    # 1-qadam: AI kontentni yaratish
+    if progress_callback:
+        await progress_callback(1, "content")
+    
+    content = await generate_presentation_content(topic, slides_count, language, has_images=False)
+    
+    # 2-qadam: Template asosida yaratish
+    if progress_callback:
+        await progress_callback(2, "template")
+    
+    safe_topic = "".join(c for c in topic[:30] if c.isalnum() or c in (' ', '-', '_')).strip()
+    safe_topic = safe_topic.replace(' ', '_')
+    filename = f"presentation_{safe_topic}.pptx"
+    
+    # Template handler orqali yaratish
+    output_path = create_presentation_from_template(
+        category=template_category,
+        template_id=template_id,
+        content_data=content,
+        output_filename=filename
+    )
+    
+    if output_path:
+        if progress_callback:
+            await progress_callback(4, "done")
+        return output_path
+    else:
+        # Fallback: scratch dan yaratish
+        logger.warning("Template topilmadi, scratch dan yaratilmoqda...")
+        return await generate_presentation(
+            topic=topic,
+            slides_count=slides_count,
+            language=language,
+            output_dir=output_dir,
+            has_ai_images=has_ai_images,
+            progress_callback=progress_callback
+        )
