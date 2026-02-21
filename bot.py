@@ -728,7 +728,6 @@ async def cancel(update: Update, context) -> int:
     await update.message.reply_text(t("cancel_message", lang))
     return ConversationHandler.END
 
-echo "✅ Bot.py qism 2 yaratildi (Shablon, Xulosa, Reja, Yaratish)"
 
 
 # ========== ADMIN VA BOSHQA FUNKTSIYALAR ==========
