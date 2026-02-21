@@ -16,9 +16,9 @@ AI_MODEL = os.environ.get("AI_MODEL", "gpt-4.1-mini")
 PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY", "")
 
 # Majburiy kanal obuna
-MANDATORY_CHANNEL_ID = int(os.environ.get("MANDATORY_CHANNEL_ID", "-1003627690761"))
-MANDATORY_CHANNEL_LINK = os.environ.get("MANDATORY_CHANNEL_LINK", "https://t.me/Ai_vazifachi")
 
+MANDATORY_CHANNEL_ID = "-1003744833983"
+MANDATORY_CHANNEL_LINK = "https://t.me/Ai_vazifachi"
 # Admin ID (botni boshqaruvchi)
 ADMIN_IDS = [int(x) for x in os.environ.get("ADMIN_IDS", "345375880").split(",")]
 
