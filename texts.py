@@ -1,4 +1,4 @@
-"""Ko'p tilli matnlar"""
+"""Ko'p tilli matnlar - TO'LIQ VERSIYA"""
 
 TEXTS = {
     # ===== Umumiy =====
@@ -51,6 +51,11 @@ TEXTS = {
         "ru": "📋 Главное меню",
         "en": "📋 Main menu"
     },
+    "cancel_message": {
+        "uz": "❌ Jarayon bekor qilindi.",
+        "ru": "❌ Процесс отменён.",
+        "en": "❌ Process cancelled."
+    },
 
     # ===== Menyu tugmalari =====
     "btn_presentation": {
@@ -99,351 +104,7 @@ TEXTS = {
         "en": "🎨 Choose template"
     },
 
-    # ===== Taqdimot - 1-qadam: Paket tanlash =====
-    "presentation_choose_package": {
-        "uz": "📊 <b>Taqdimot turini tanlang:</b>\n\n"
-              "📋 <b>Oddiy taqdimot</b>\n"
-              "   Stock fotolar bilan professional taqdimot\n\n"
-              "⭐ <b>Premium taqdimot</b>\n"
-              "   AI rasmlar va diagrammalar bilan yuqori sifatli taqdimot",
-        "ru": "📊 <b>Выберите тип презентации:</b>\n\n"
-              "📋 <b>Обычная презентация</b>\n"
-              "   Профессиональная презентация со стоковыми фото\n\n"
-              "⭐ <b>Премиум презентация</b>\n"
-              "   Высококачественная презентация с AI изображениями и диаграммами",
-        "en": "📊 <b>Choose presentation type:</b>\n\n"
-              "📋 <b>Standard presentation</b>\n"
-              "   Professional presentation with stock photos\n\n"
-              "⭐ <b>Premium presentation</b>\n"
-              "   High-quality presentation with AI images and diagrams"
-    },
-    "btn_package_standard": {
-        "uz": "📋 Oddiy taqdimot",
-        "ru": "📋 Обычная презентация",
-        "en": "📋 Standard presentation"
-    },
-    "btn_package_premium": {
-        "uz": "⭐ Premium taqdimot",
-        "ru": "⭐ Премиум презентация",
-        "en": "⭐ Premium presentation"
-    },
-
-    # ===== Taqdimot - 2-qadam: Sahifalar soni =====
-    "presentation_choose_slides": {
-        "uz": "📄 <b>Sahifalar soni nechta bo'lsin?</b>\n\nQuyidagi tugmalardan birini tanlang (6 dan 30 gacha):",
-        "ru": "📄 <b>Сколько страниц?</b>\n\nВыберите одну из кнопок ниже (от 6 до 30):",
-        "en": "📄 <b>How many slides?</b>\n\nChoose one of the buttons below (6 to 30):"
-    },
-
-    # ===== Taqdimot - 3-qadam: Dizayn tanlash =====
-    "presentation_choose_template": {
-        "uz": "🎨 <b>Dizaynni tanlang:</b>",
-        "ru": "🎨 <b>Выберите дизайн:</b>",
-        "en": "🎨 <b>Choose design:</b>"
-    },
-    "btn_template_business": {
-        "uz": "💼 Biznes",
-        "ru": "💼 Бизнес",
-        "en": "💼 Business"
-    },
-    "btn_template_education": {
-        "uz": "🎓 Ta'lim",
-        "ru": "🎓 Образование",
-        "en": "🎓 Education"
-    },
-    "btn_template_technology": {
-        "uz": "💻 Texnologiya",
-        "ru": "💻 Технологии",
-        "en": "💻 Technology"
-    },
-    "btn_template_medical": {
-        "uz": "🏥 Tibbiyot",
-        "ru": "🏥 Медицина",
-        "en": "🏥 Medical"
-    },
-    "btn_template_creative": {
-        "uz": "🎨 Ijodiy",
-        "ru": "🎨 Креативный",
-        "en": "🎨 Creative"
-    },
-    "btn_template_minimal": {
-        "uz": "⬜ Minimalist",
-        "ru": "⬜ Минималист",
-        "en": "⬜ Minimal"
-    },
-
-    # ===== Taqdimot - 4-qadam: Mavzu =====
-    "presentation_topic": {
-        "uz": "📝 <b>Taqdimot mavzusini kiriting:</b>\n\n"
-              "• Mavzuni batafsil yoritishga harakat qiling.\n"
-              "• Qisqartma so'zlarga, imloviy xatoli so'zlarga tushunmay qolishim mumkin.\n\n"
-              "💡 Masalan: <i>Suniy intellekt va uning kelajagi</i>",
-        "ru": "📝 <b>Введите тему презентации:</b>\n\n"
-              "• Постарайтесь подробно описать тему.\n"
-              "• Сокращения и ошибки могут быть неправильно поняты.\n\n"
-              "💡 Например: <i>Искусственный интеллект и его будущее</i>",
-        "en": "📝 <b>Enter the presentation topic:</b>\n\n"
-              "• Try to describe the topic in detail.\n"
-              "• Abbreviations and typos may be misunderstood.\n\n"
-              "💡 Example: <i>Artificial Intelligence and its future</i>"
-    },
-    "presentation_summary": {
-        "uz": "📋 <b>Taqdimot Haqida</b>\n\n"
-              "📌 <b>Mavzu:</b> {topic}\n"
-              "📦 <b>Paket:</b> {package}\n"
-              "🎨 <b>Dizayn:</b> {template}\n"
-              "📄 <b>Sahifalar soni:</b> {slides} ta\n"
-              "🌐 <b>Til:</b> {lang_name}\n"
-              "💰 <b>Narx:</b> {price} so'm\n\n"
-              "👉 Ushbu sozlamalar asosida slaydingiz yaratiladi.\n"
-              "Davom etish uchun <b>✅ Yaratish</b> tugmasini bosing.",
-        "ru": "📋 <b>О презентации</b>\n\n"
-              "📌 <b>Тема:</b> {topic}\n"
-              "📦 <b>Пакет:</b> {package}\n"
-              "🎨 <b>Дизайн:</b> {template}\n"
-              "📄 <b>Количество страниц:</b> {slides}\n"
-              "🌐 <b>Язык:</b> {lang_name}\n"
-              "💰 <b>Цена:</b> {price} сум\n\n"
-              "👉 Презентация будет создана с этими настройками.\n"
-              "Для продолжения нажмите <b>✅ Создать</b>.",
-        "en": "📋 <b>Presentation Info</b>\n\n"
-              "📌 <b>Topic:</b> {topic}\n"
-              "📦 <b>Package:</b> {package}\n"
-              "🎨 <b>Design:</b> {template}\n"
-              "📄 <b>Number of slides:</b> {slides}\n"
-              "🌐 <b>Language:</b> {lang_name}\n"
-              "💰 <b>Price:</b> {price} sum\n\n"
-              "👉 Your presentation will be created with these settings.\n"
-              "Press <b>✅ Create</b> to continue."
-    },
-    "presentation_generating": {
-        "uz": "⏳ Taqdimot tayyorlanmoqda...\n\n📊 Mavzu: {topic}\n🎨 Dizayn: {template}\n📄 Sahifalar: {slides}\n💰 Narx: {price} so'm\n\nBu 1-3 daqiqa vaqt olishi mumkin.",
-        "ru": "⏳ Презентация готовится...\n\n📊 Тема: {topic}\n🎨 Дизайн: {template}\n📄 Страницы: {slides}\n💰 Цена: {price} сум\n\nЭто может занять 1-3 минуты.",
-        "en": "⏳ Generating presentation...\n\n📊 Topic: {topic}\n🎨 Design: {template}\n📄 Slides: {slides}\n💰 Price: {price} sum\n\nThis may take 1-3 minutes."
-    },
-    "presentation_ready": {
-        "uz": "✅ Taqdimot tayyor! Yuklab oling:",
-        "ru": "✅ Презентация готова! Скачайте:",
-        "en": "✅ Presentation is ready! Download:"
-    },
-
-    # ===== Matn yozish =====
-    "text_type_select": {
-        "uz": "✍️ Qanday turdagi matn yozilsin?",
-        "ru": "✍️ Какой тип текста написать?",
-        "en": "✍️ What type of text to write?"
-    },
-    "btn_essay": {
-        "uz": "📝 Esse",
-        "ru": "📝 Эссе",
-        "en": "📝 Essay"
-    },
-    "btn_article": {
-        "uz": "📰 Maqola",
-        "ru": "📰 Статья",
-        "en": "📰 Article"
-    },
-    "btn_report": {
-        "uz": "📄 Referat",
-        "ru": "📄 Реферат",
-        "en": "📄 Report"
-    },
-    "text_topic": {
-        "uz": "✍️ {text_type} mavzusini yozing:",
-        "ru": "✍️ Напишите тему {text_type}:",
-        "en": "✍️ Write the {text_type} topic:"
-    },
-    "text_generating": {
-        "uz": "⏳ Matn yozilmoqda... Bu 1-2 daqiqa vaqt olishi mumkin.",
-        "ru": "⏳ Текст пишется... Это может занять 1-2 минуты.",
-        "en": "⏳ Writing text... This may take 1-2 minutes."
-    },
-    "text_ready": {
-        "uz": "✅ Matn tayyor!",
-        "ru": "✅ Текст готов!",
-        "en": "✅ Text is ready!"
-    },
-
-    # ===== Balans =====
-    "balance_info": {
-        "uz": "💰 Sizning balansingiz: <b>{balance} so'm</b>\n\n"
-              "📊 <b>Taqdimot narxlari:</b>\n"
-              "  📋 Oddiy:   2,000 - 5,000 so'm\n"
-              "  ⭐ Premium: 4,000 - 8,000 so'm\n\n"
-              "✍️ <b>Matn yozish:</b> {text_price} so'm\n\n"
-              "➖➖➖➖➖➖➖➖➖➖\n"
-              "Balansni to'ldirish uchun: /buy",
-        "ru": "💰 Ваш баланс: <b>{balance} сум</b>\n\n"
-              "📊 <b>Цены на презентации:</b>\n"
-              "  📋 Обычная:  2,000 - 5,000 сум\n"
-              "  ⭐ Премиум: 4,000 - 8,000 сум\n\n"
-              "✍️ <b>Написание текста:</b> {text_price} сум\n\n"
-              "➖➖➖➖➖➖➖➖➖➖\n"
-              "Пополнить баланс: /buy",
-        "en": "💰 Your balance: <b>{balance} sum</b>\n\n"
-              "📊 <b>Presentation prices:</b>\n"
-              "  📋 Standard: 2,000 - 5,000 sum\n"
-              "  ⭐ Premium:  4,000 - 8,000 sum\n\n"
-              "✍️ <b>Text writing:</b> {text_price} sum\n\n"
-              "➖➖➖➖➖➖➖➖➖➖\n"
-              "Top up balance: /buy"
-    },
-    "not_enough_balance": {
-        "uz": "❌ Balansingiz yetarli emas!\n\n💰 Sizda: {balance} so'm\n💳 Kerak: {needed} so'm\n\nBalansni to'ldirish uchun: /buy",
-        "ru": "❌ Недостаточно средств!\n\n💰 У вас: {balance} сум\n💳 Нужно: {needed} сум\n\nПополнить баланс: /buy",
-        "en": "❌ Insufficient balance!\n\n💰 You have: {balance} sum\n💳 Need: {needed} sum\n\nTop up balance: /buy"
-    },
-    "buy_balance_info": {
-        "uz": "🛒 Balansni to'ldirish\n\nQuyidagi paketlardan birini tanlang:",
-        "ru": "🛒 Пополнение баланса\n\nВыберите один из пакетов:",
-        "en": "🛒 Top up balance\n\nChoose one of the packages:"
-    },
-    "payment_instructions": {
-        "uz": "💳 To'lov qilish uchun:\n\n1️⃣ Quyidagi karta raqamiga {amount} so'm o'tkazing:\n\n<code>{card_number}</code>\n👤 {card_holder}\n\n2️⃣ To'lov chekini (screenshot) shu yerga yuboring.",
-        "ru": "💳 Для оплаты:\n\n1️⃣ Переведите {amount} сум на карту:\n\n<code>{card_number}</code>\n👤 {card_holder}\n\n2️⃣ Отправьте чек (скриншот) сюда.",
-        "en": "💳 To make payment:\n\n1️⃣ Transfer {amount} sum to the card:\n\n<code>{card_number}</code>\n👤 {card_holder}\n\n2️⃣ Send the receipt (screenshot) here."
-    },
-    "payment_received": {
-        "uz": "✅ Chek qabul qilindi! Admin tekshirgandan so'ng balansingiz to'ldiriladi.",
-        "ru": "✅ Чек получен! Баланс будет пополнен после проверки администратором.",
-        "en": "✅ Receipt received! Balance will be topped up after admin verification."
-    },
-
-    # ===== Yordam =====
-    "help_text": {
-        "uz": "❓ <b>Yordam</b>\n\nBu bot sizga quyidagi vazifalarda yordam beradi:\n\n"
-              "📊 <b>Taqdimot yaratish</b> - mavzu yozing, bot PowerPoint taqdimot yaratib beradi\n"
-              "✍️ <b>Matn yozish</b> - esse, maqola yoki referat yozdiring\n\n"
-              "💰 <b>Narxlar:</b>\n"
-              "📋 Oddiy taqdimot: 2,000 - 5,000 so'm\n"
-              "⭐ Premium taqdimot: 4,000 - 8,000 so'm\n"
-              "✍️ Matn yozish: 3,000 so'm\n\n"
-              "🛒 Balansni to'ldirish: /buy",
-        "ru": "❓ <b>Помощь</b>\n\nЭтот бот поможет вам с:\n\n"
-              "📊 <b>Создание презентаций</b> - напишите тему, бот создаст PowerPoint\n"
-              "✍️ <b>Написание текстов</b> - эссе, статьи или рефераты\n\n"
-              "💰 <b>Цены:</b>\n"
-              "📋 Обычная презентация: 2,000 - 5,000 сум\n"
-              "⭐ Премиум презентация: 4,000 - 8,000 сум\n"
-              "✍️ Написание текста: 3,000 сум\n\n"
-              "🛒 Пополнить баланс: /buy",
-        "en": "❓ <b>Help</b>\n\nThis bot helps you with:\n\n"
-              "📊 <b>Create presentations</b> - write a topic, bot creates PowerPoint\n"
-              "✍️ <b>Write texts</b> - essays, articles or reports\n\n"
-              "💰 <b>Prices:</b>\n"
-              "📋 Standard presentation: 2,000 - 5,000 sum\n"
-              "⭐ Premium presentation: 4,000 - 8,000 sum\n"
-              "✍️ Text writing: 3,000 sum\n\n"
-              "🛒 Top up balance: /buy"
-    },
-
-    # ===== Progress =====
-    "progress_step1": {
-        "uz": "📝 Rejalar yaratilmoqda...",
-        "ru": "📝 Создание плана...",
-        "en": "📝 Creating outline..."
-    },
-    "progress_step2": {
-        "uz": "✍️ Matnlar yozilmoqda...",
-        "ru": "✍️ Написание текстов...",
-        "en": "✍️ Writing content..."
-    },
-    "progress_step3": {
-        "uz": "🎨 Dizayn qo'llanilmoqda...",
-        "ru": "🎨 Применение дизайна...",
-        "en": "🎨 Applying design..."
-    },
-    "progress_step4": {
-        "uz": "✅ Taqdimot tayyor!",
-        "ru": "✅ Презентация готова!",
-        "en": "✅ Presentation is ready!"
-    },
-
-    # ===== Xatoliklar =====
-    "error_general": {
-        "uz": "❌ Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.",
-        "ru": "❌ Произошла ошибка. Пожалуйста, попробуйте снова.",
-        "en": "❌ An error occurred. Please try again."
-    },
-    "error_ai": {
-        "uz": "❌ AI xizmati bilan bog'lanishda xatolik. Iltimos, keyinroq urinib ko'ring.",
-        "ru": "❌ Ошибка связи с AI сервисом. Попробуйте позже.",
-        "en": "❌ Error connecting to AI service. Please try later."
-    },
-
-    # ===== Admin =====
-    "admin_panel": {
-        "uz": "🔧 Admin panel\n\n👥 Foydalanuvchilar: {users}\n📋 Bajarilgan vazifalar: {tasks}\n💳 Tasdiqlangan to'lovlar: {payments}\n💰 Jami daromad: {revenue} so'm",
-        "ru": "🔧 Админ панель\n\n👥 Пользователи: {users}\n📋 Выполненные задачи: {tasks}\n💳 Одобренные платежи: {payments}\n💰 Общий доход: {revenue} сум",
-        "en": "🔧 Admin panel\n\n👥 Users: {users}\n📋 Completed tasks: {tasks}\n💳 Approved payments: {payments}\n💰 Total revenue: {revenue} sum"
-    },
-    "btn_admin_stats": {
-        "uz": "📊 Statistika",
-        "ru": "📊 Статистика",
-        "en": "📊 Statistics"
-    },
-    "btn_admin_payments": {
-        "uz": "💳 Kutilayotgan to'lovlar",
-        "ru": "💳 Ожидающие платежи",
-        "en": "💳 Pending payments"
-    },
-    "btn_admin_broadcast": {
-        "uz": "📢 Xabar yuborish",
-        "ru": "📢 Рассылка",
-        "en": "📢 Broadcast"
-    },
-    "btn_approve": {
-        "uz": "✅ Tasdiqlash",
-        "ru": "✅ Одобрить",
-        "en": "✅ Approve"
-    },
-    "btn_reject": {
-        "uz": "❌ Rad etish",
-        "ru": "❌ Отклонить",
-        "en": "❌ Reject"
-    },
-    "payment_approved_user": {
-        "uz": "✅ To'lovingiz tasdiqlandi! {amount} so'm balansingizga qo'shildi.\n\n💰 Joriy balans: {balance} so'm",
-        "ru": "✅ Оплата одобрена! {amount} сум добавлено на баланс.\n\n💰 Текущий баланс: {balance} сум",
-        "en": "✅ Payment approved! {amount} sum added to balance.\n\n💰 Current balance: {balance} sum"
-    },
-    "payment_rejected_user": {
-        "uz": "❌ To'lovingiz rad etildi. Iltimos, to'g'ri chek yuboring yoki admin bilan bog'laning.",
-        "ru": "❌ Оплата отклонена. Пожалуйста, отправьте правильный чек или свяжитесь с админом.",
-        "en": "❌ Payment rejected. Please send a correct receipt or contact admin."
-    },
-    "no_pending_payments": {
-        "uz": "✅ Kutilayotgan to'lovlar yo'q.",
-        "ru": "✅ Нет ожидающих платежей.",
-        "en": "✅ No pending payments."
-    },
-    "broadcast_prompt": {
-        "uz": "📢 Barcha foydalanuvchilarga yuboriladigan xabarni yozing:",
-        "ru": "📢 Напишите сообщение для рассылки всем пользователям:",
-        "en": "📢 Write a message to broadcast to all users:"
-    },
-    "broadcast_sent": {
-        "uz": "✅ Xabar {count} foydalanuvchiga yuborildi.",
-        "ru": "✅ Сообщение отправлено {count} пользователям.",
-        "en": "✅ Message sent to {count} users."
-    },
-}
-
-
-def t(key: str, lang: str = "uz", **kwargs) -> str:
-    """Matnni olish"""
-    text_dict = TEXTS.get(key, {})
-    text = text_dict.get(lang, text_dict.get("uz", f"[{key}]"))
-    if kwargs:
-        try:
-            text = text.format(**kwargs)
-        except (KeyError, IndexError):
-            pass
-    return text
-"""YANGI MATNLAR - texts.py ga qo'shish kerak"""
-
-NEW_TEXTS = {
-    # Taqdimot - yangi jarayon
+    # ===== YANGI: Taqdimot - yangi jarayon =====
     "presentation_topic_input": {
         "uz": "📝 <b>Taqdimot mavzusini kiriting:</b>\n\nMasalan: Sun'iy intellekt rivojlanishi",
         "ru": "📝 <b>Введите тему презентации:</b>\n\nНапример: Развитие искусственного интеллекта",
@@ -565,7 +226,65 @@ How to create presentation plan?"""
         "uz": "❌ Taqdimot yaratishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.",
         "ru": "❌ Ошибка при создании презентации. Пожалуйста, попробуйте снова.",
         "en": "❌ Error creating presentation. Please try again."
-    }
+    },
+    
+    "presentation_ready": {
+        "uz": "✅ Taqdimot tayyor!",
+        "ru": "✅ Презентация готова!",
+        "en": "✅ Presentation ready!"
+    },
+
+    # ===== ESKI MATNLAR (paket, sahifalar va hokazo) =====
+    "btn_package_standard": {
+        "uz": "📦 Oddiy paket",
+        "ru": "📦 Стандартный пакет",
+        "en": "📦 Standard package"
+    },
+    "btn_package_premium": {
+        "uz": "⭐ Premium paket",
+        "ru": "⭐ Премиум пакет",
+        "en": "⭐ Premium package"
+    },
+    "presentation_choose_package": {
+        "uz": "📦 <b>Paketni tanlang:</b>\n\n<b>Oddiy:</b> Asosiy dizayn\n<b>Premium:</b> Professional dizayn + AI rasmlar",
+        "ru": "📦 <b>Выберите пакет:</b>\n\n<b>Стандарт:</b> Базовый дизайн\n<b>Премиум:</b> Профессиональный дизайн + AI изображения",
+        "en": "📦 <b>Choose package:</b>\n\n<b>Standard:</b> Basic design\n<b>Premium:</b> Professional design + AI images"
+    },
+    "presentation_choose_slides": {
+        "uz": "📄 <b>Sahifalar sonini tanlang:</b>\n\n6 dan 30 gacha",
+        "ru": "📄 <b>Выберите количество слайдов:</b>\n\nОт 6 до 30",
+        "en": "📄 <b>Choose number of slides:</b>\n\nFrom 6 to 30"
+    },
+    "presentation_choose_template": {
+        "uz": "🎨 <b>Dizayn shablonini tanlang:</b>",
+        "ru": "🎨 <b>Выберите шаблон дизайна:</b>",
+        "en": "🎨 <b>Choose design template:</b>"
+    },
+    "not_enough_balance": {
+        "uz": "❌ Balans yetarli emas!\n\n💰 Sizning balansingiz: {balance} so'm\n📊 Kerak: {needed} so'm\n\nIltimos, balansni to'ldiring.",
+        "ru": "❌ Недостаточно средств!\n\n💰 Ваш баланс: {balance} сум\n📊 Необходимо: {needed} сум\n\nПожалуйста, пополните баланс.",
+        "en": "❌ Insufficient balance!\n\n💰 Your balance: {balance} sum\n📊 Required: {needed} sum\n\nPlease top up your balance."
+    },
+    "balance_info": {
+        "uz": "💰 <b>Balans ma'lumotlari:</b>\n\nJoriy balans: {balance} so'm\n\n📊 Narxlar:\n• Taqdimot: 3,000 - 50,000 so'm\n• Matn yozish: {text_price} so'm",
+        "ru": "💰 <b>Информация о балансе:</b>\n\nТекущий баланс: {balance} сум\n\n📊 Цены:\n• Презентация: 3,000 - 50,000 сум\n• Написание текста: {text_price} сум",
+        "en": "💰 <b>Balance information:</b>\n\nCurrent balance: {balance} sum\n\n📊 Prices:\n• Presentation: 3,000 - 50,000 sum\n• Text writing: {text_price} sum"
+    },
+    "help_text": {
+        "uz": "❓ <b>Yordam:</b>\n\nBot orqali siz:\n📊 Professional taqdimot yaratishingiz\n✍️ Matn yozdirishingiz mumkin\n\nSavollar bo'lsa: @support",
+        "ru": "❓ <b>Помощь:</b>\n\nЧерез бота вы можете:\n📊 Создать профессиональную презентацию\n✍️ Написать текст\n\nВопросы: @support",
+        "en": "❓ <b>Help:</b>\n\nYou can:\n📊 Create professional presentations\n✍️ Write texts\n\nQuestions: @support"
+    },
 }
 
-print("✅ Yangi matnlar tayyor - texts.py ga qo'shish kerak")
+
+def t(key: str, lang: str = "uz", **kwargs) -> str:
+    """Matnni olish"""
+    text_dict = TEXTS.get(key, {})
+    text = text_dict.get(lang, text_dict.get("uz", f"[{key}]"))
+    if kwargs:
+        try:
+            text = text.format(**kwargs)
+        except (KeyError, IndexError):
+            pass
+    return text
