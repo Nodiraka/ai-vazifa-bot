@@ -17,8 +17,9 @@ PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY", "")
 
 # Majburiy kanal obuna
 
-MANDATORY_CHANNEL_ID = "-1003744833983"
+MANDATORY_CHANNEL_ID = -1003744833983  # ✅ INTEGER - qo'shtirnoqsiz!
 MANDATORY_CHANNEL_LINK = "https://t.me/Ai_vazifachi"
+
 # Admin ID (botni boshqaruvchi)
 ADMIN_IDS = [int(x) for x in os.environ.get("ADMIN_IDS", "345375880").split(",")]
 
