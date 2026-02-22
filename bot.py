@@ -311,8 +311,8 @@ async def presentation_slides_selected(update: Update, context) -> int:
     keyboard = [
         [InlineKeyboardButton(
             t("btn_choose_template", lang),
-            web_app=WebAppInfo(url="https://nodiraka.github.io/bot-templates-miniapp/")
-        )],
+            web_app=WebAppInfo(url="https://nodiraka.github.io/bot-templates-miniapp/?v=2")
+                   )],
         [InlineKeyboardButton(t("btn_cancel", lang), callback_data="cancel")]
     ]
     
